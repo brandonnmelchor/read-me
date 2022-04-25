@@ -2,22 +2,22 @@ import * as bootstrap from "bootstrap";
 
 let readingList = [];
 
-function Book(title, author, pages, read, comments) {
+function Book(title, author, year, read) {
   this.title = title;
   this.author = author;
-  this.pages = pages;
+  this.year = year;
   this.read = read;
   this.showInfo = function () {
-    return `${title} by ${author}. ${pages} pages. ${read ? "Read" : "Pending"}.`;
+    return `${title} by ${author}. Written ${year}. ${read ? "Read" : "Pending"}.`;
   };
 }
 
-function addBookToList(title, author, pages, read) {
-  const newBook = new Book(title, author, pages, read);
+function addBookToList(title, author, year, read) {
+  const newBook = new Book(title, author, year, read);
   readingList.push(newBook);
 }
 
 let title = "The Hobbit";
 let author = "J.R.R. Tolkien";
-let pages = 295;
+let year = 295;
 let read = true;
