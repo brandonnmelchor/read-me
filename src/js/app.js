@@ -1,3 +1,5 @@
+import * as bootstrap from "bootstrap";
+
 let readingList = [];
 
 function Book(title, author, pages, read, comments) {

@@ -8,17 +8,9 @@
     "build": "rm -rf ./.parcel-cache && rm -rf ./dist && parcel build",
     "clean": "rm -rf ./.parcel-cache && rm -rf ./dist"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/brandonnmelchor/reading-list.git"
-  },
   "keywords": [],
   "author": "Brandonn Melchor",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/brandonnmelchor/reading-list/issues"
-  },
-  "homepage": "https://github.com/brandonnmelchor/reading-list#readme",
   "dependencies": {
     "bootstrap": "^5.1.3",
     "bootstrap-icons": "^1.8.1"
