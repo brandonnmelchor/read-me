@@ -4,7 +4,7 @@
   "description": "",
   "source": "src/index.html",
   "scripts": {
-    "dev": "rm -rf ./.parcel-cache && rm -rf ./dist && parcel --public-url ./",
+    "dev": "rm -rf ./.parcel-cache && rm -rf ./dist && parcel",
     "build": "rm -rf ./.parcel-cache && rm -rf ./dist && parcel build --public-url ./",
     "clean": "rm -rf ./.parcel-cache && rm -rf ./dist"
   },
