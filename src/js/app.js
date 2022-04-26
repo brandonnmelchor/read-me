@@ -58,6 +58,7 @@ function createBook(e) {
   let comments = commentsAdd.value;
   readStatus = document.querySelector('input[name="read-pending"]:checked').value;
 
+  if (checkDuplicates(title)) return;
   addBook(title, author, year, comments, readStatus);
   createCards();
   createEditEvents();
@@ -65,6 +66,15 @@ function createBook(e) {
 
   addBookModal.hide();
   resetAddBookForm();
+}
+
+function checkDuplicates(title) {
+  let duplicateBook = false;
+  readingList.forEach((book) => {
+    if (book.title.toLowerCase() === title.toLowerCase()) duplicateBook = true;
+  });
+
+  return duplicateBook;
 }
 
 function addBook(title, author, year, comments, read) {
