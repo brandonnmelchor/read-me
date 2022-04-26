@@ -28,7 +28,7 @@ editBookForm.addEventListener("submit", editBook);
 function createEditEvents() {
   const editButtons = document.querySelectorAll(".edit");
   editButtons.forEach((button) => {
-    button.addEventListener("click", findEditIndex);
+    button.addEventListener("click", setEditBookForm);
   });
 }
 
@@ -142,8 +142,12 @@ function resetAddBookForm() {
   document.getElementById("pending").checked = false;
 }
 
-function findEditIndex() {
+function setEditBookForm() {
   cardEditIndex = this.parentElement.parentElement.parentElement.id;
+  titleEdit.value = readingList[cardEditIndex].title;
+  authorEdit.value = readingList[cardEditIndex].author;
+  yearEdit.value = readingList[cardEditIndex].year;
+  commentsEdit.value = readingList[cardEditIndex].comments;
 }
 
 function editBook(e) {
@@ -155,6 +159,7 @@ function editBook(e) {
   readingList[cardEditIndex].comments = commentsEdit.value ? commentsEdit.value : readingList[cardEditIndex].comments;
 
   createCards();
+  createEditEvents();
   createDeleteEvents();
 
   editBookModal.hide();
