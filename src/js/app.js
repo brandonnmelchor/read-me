@@ -63,13 +63,13 @@ function createCard() {
     const buttonDelete = document.createElement("button");
 
     col.classList.add("col");
-    card.classList.add("card");
+    card.classList.add("card", "h-100");
     cardHeader.classList.add("card-header");
-    cardBody1.classList.add("card-body");
+    cardBody1.classList.add("card-body", "h-100");
     cardTitle.classList.add("card-title", "text-muted", "mb-3");
     cardText.classList.add("card-text");
     cardBody2.classList.add("card-body", "d-flex", "gap-2");
-    checkbox.classList.add("btn-check");
+    checkbox.classList.add("btn-check", "read-pending");
     buttonRead.classList.add("btn", "btn-outline-secondary", "me-auto");
     buttonEdit.classList.add("btn", "btn-outline-secondary");
     buttonDelete.classList.add("btn", "btn-outline-secondary");
