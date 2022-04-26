@@ -51,7 +51,7 @@
     <section>
       <div class="container-lg py-5">
         <div class="row row-cols row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4" id="book-list">
-          <div class="col">
+          <!-- <div class="col">
             <div class="card">
               <h5 class="card-header">The Count of Monte Cristo</h5>
               <div class="card-body">
@@ -66,7 +66,7 @@
                 <button type="button" class="btn btn-outline-secondary">Delete</button>
               </div>
             </div>
-          </div>
+          </div> -->
     </section>
 
     <form id="new-book" onsubmit="() => false;">
@@ -82,23 +82,23 @@
               <label for="title" class="form-label">Title:</label>
               <div class="input-group mb-4">
                 <span class="input-group-text"><i class="bi bi-slash-square"></i></span>
-                <input type="text" class="form-control" id="title" placeholder="e.g. Dune"  autocomplete="off" required/>
+                <input type="text" class="form-control" id="title" placeholder="e.g. Dune" maxlength="27" autocomplete="off" required/>
               </div>
               
               <label for="author" class="form-label">Author:</label>
               <div class="input-group mb-4">
                 <span class="input-group-text"><i class="bi bi-eye"></i></span>
-                <input type="text" class="form-control" id="author" placeholder="e.g. Frank Herbert"  autocomplete="off" required/>
+                <input type="text" class="form-control" id="author" placeholder="e.g. Frank Herbert" autocomplete="off" required/>
               </div>
               
               <label for="year" class="form-label">Year:</label>
               <div class="input-group mb-4">
                 <span class="input-group-text"><i class="bi bi-triangle"></i></span>
-                <input type="number" class="form-control" id="year" placeholder="e.g. 1965" min="0" max="2022"  autocomplete="off" required/>
+                <input type="number" class="form-control" id="year" placeholder="e.g. 1965" min="0" max="2022" autocomplete="off" required/>
               </div>
 
               <div class="form-floating mb-4">
-                <textarea class="form-control" id="comments" maxlength="100"  autocomplete="off" style="height: 100px"></textarea>
+                <textarea class="form-control" id="comments" maxlength="100" autocomplete="off" style="height: 100px"></textarea>
                 <label for="comments">Comments.</label>
               </div>
             </div>
@@ -110,7 +110,7 @@
               <input type="radio" class="btn-check" name="read-pending" id="pending" value="Pending" autocomplete="off">
               <label class="btn btn-outline-secondary me-auto" for="pending">Pending</label>
 
-              <button type="submit" class="btn  btn-outline-secondary">Submit</button>
+              <button type="submit" class="btn btn-outline-secondary">Submit</button>
             </div>
           </div>
         </div>

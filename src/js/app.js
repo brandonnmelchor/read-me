@@ -85,12 +85,21 @@ function createCard() {
     buttonEdit.classList.add("btn", "btn-outline-secondary");
     buttonDelete.classList.add("btn", "btn-outline-secondary");
 
+    col.setAttribute("id", `book${index}`);
     checkbox.setAttribute("type", "checkbox");
-    checkbox.setAttribute("id", `book${1}`);
+    checkbox.setAttribute("id", `read-book${index}`);
     checkbox.setAttribute("autocomplete", "off");
-    buttonRead.setAttribute("for", `book${1}`);
+    buttonRead.setAttribute("for", `read-book${index}`);
     buttonEdit.setAttribute("type", "button");
     buttonDelete.setAttribute("type", "button");
+
+    cardHeader.textContent = book.title;
+    cardTitle.textContent = `${book.author} | ${book.year}`;
+    cardText.textContent = book.comments;
+    buttonRead.textContent = book.read;
+    if (book.read == "Read") checkbox.checked = true;
+    buttonEdit.textContent = "Edit";
+    buttonDelete.textContent = "Delete";
 
     bookList.appendChild(col);
     col.appendChild(card);
@@ -105,3 +114,20 @@ function createCard() {
     cardBody2.appendChild(buttonDelete);
   });
 }
+
+// Placeholder Books
+let phTitle1 = "The Count of Monte Cristo";
+let phAuthor1 = "Alexandre Dumas";
+let phYear1 = 1844;
+let phComments1 = "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis, autem.";
+let phRead1 = "Read";
+
+let phTitle2 = "Dune";
+let phAuthor2 = "Frank Herbert";
+let phYear2 = 1965;
+let phComments2 = "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis, autem.";
+let phRead2 = "Pending";
+
+addBookToList(phTitle1, phAuthor1, phYear1, phComments1, phRead1);
+addBookToList(phTitle2, phAuthor2, phYear2, phComments2, phRead2);
+createCard();
