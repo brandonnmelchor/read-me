@@ -5,16 +5,39 @@ import * as bootstrap from "bootstrap";
 let readingList = [];
 const bookList = document.getElementById("book-list");
 
-let modal = new bootstrap.Modal(document.getElementById("add-book"));
-const form = document.getElementById("new-book");
-const titleInput = document.getElementById("title");
-const authorInput = document.getElementById("author");
-const yearInput = document.getElementById("year");
-const commentsInput = document.getElementById("comments");
-let read;
+let addBookModal = new bootstrap.Modal(document.getElementById("add-book-modal"));
+const addBookForm = document.getElementById("add-book-form");
+const titleAdd = document.getElementById("title");
+const authorAdd = document.getElementById("author");
+const yearAdd = document.getElementById("year");
+const commentsAdd = document.getElementById("comments");
+let readStatus;
+
+let editBookModal = new bootstrap.Modal(document.getElementById("edit-book-modal"));
+const editBookForm = document.getElementById("edit-book-form");
+const titleEdit = document.getElementById("edit-title");
+const authorEdit = document.getElementById("edit-author");
+const yearEdit = document.getElementById("edit-year");
+const commentsEdit = document.getElementById("edit-comments");
+let cardEditIndex;
 
 // Event Listeners
-form.addEventListener("submit", createBook);
+addBookForm.addEventListener("submit", createBook);
+editBookForm.addEventListener("submit", editBook);
+
+function createEditEvents() {
+  const editButtons = document.querySelectorAll(".edit");
+  editButtons.forEach((button) => {
+    button.addEventListener("click", findEditIndex);
+  });
+}
+
+function createDeleteEvents() {
+  const deleteButtons = document.querySelectorAll(".delete");
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", removeBook);
+  });
+}
 
 // Constructor
 function Book(title, author, year, comments, read) {
@@ -29,18 +52,19 @@ function Book(title, author, year, comments, read) {
 function createBook(e) {
   e.preventDefault();
 
-  let title = titleInput.value;
-  let author = authorInput.value;
-  let year = yearInput.value;
-  let comments = commentsInput.value;
-  read = document.querySelector('input[name="read-pending"]:checked').value;
+  let title = titleAdd.value;
+  let author = authorAdd.value;
+  let year = yearAdd.value;
+  let comments = commentsAdd.value;
+  readStatus = document.querySelector('input[name="read-pending"]:checked').value;
 
-  addBook(title, author, year, comments, read);
+  addBook(title, author, year, comments, readStatus);
   createCards();
+  createEditEvents();
   createDeleteEvents();
 
-  modal.hide();
-  resetForm();
+  addBookModal.hide();
+  resetAddBookForm();
 }
 
 function addBook(title, author, year, comments, read) {
@@ -73,7 +97,7 @@ function createCards() {
     cardBody2.classList.add("card-body", "d-flex", "gap-2");
     checkbox.classList.add("btn-check");
     readLabel.classList.add("btn", "btn-outline-secondary", "me-auto");
-    buttonEdit.classList.add("btn", "btn-outline-secondary");
+    buttonEdit.classList.add("btn", "btn-outline-secondary", "edit");
     buttonDelete.classList.add("btn", "btn-outline-secondary", "delete");
 
     col.setAttribute("id", `${index}`);
@@ -82,6 +106,8 @@ function createCards() {
     checkbox.setAttribute("autocomplete", "off");
     readLabel.setAttribute("for", `read-book${index}`);
     buttonEdit.setAttribute("type", "button");
+    buttonEdit.setAttribute("data-bs-toggle", "modal");
+    buttonEdit.setAttribute("data-bs-target", "#edit-book-modal");
     buttonDelete.setAttribute("type", "button");
 
     cardHeader.textContent = book.title;
@@ -106,21 +132,40 @@ function createCards() {
   });
 }
 
-function resetForm() {
-  titleInput.value = "";
-  authorInput.value = "";
-  yearInput.value = "";
-  commentsInput.value = "";
-  read = "";
+function resetAddBookForm() {
+  titleAdd.value = "";
+  authorAdd.value = "";
+  yearAdd.value = "";
+  commentsAdd.value = "";
+  readStatus = "";
   document.getElementById("read").checked = true;
   document.getElementById("pending").checked = false;
 }
 
-function createDeleteEvents() {
-  const deleteButtons = document.querySelectorAll(".delete");
-  deleteButtons.forEach((button) => {
-    button.addEventListener("click", removeBook);
-  });
+function findEditIndex() {
+  cardEditIndex = this.parentElement.parentElement.parentElement.id;
+}
+
+function editBook(e) {
+  e.preventDefault();
+
+  readingList[cardEditIndex].title = titleEdit.value ? titleEdit.value : readingList[cardEditIndex].title;
+  readingList[cardEditIndex].author = authorEdit.value ? authorEdit.value : readingList[cardEditIndex].author;
+  readingList[cardEditIndex].year = yearEdit.value ? yearEdit.value : readingList[cardEditIndex].year;
+  readingList[cardEditIndex].comments = commentsEdit.value ? commentsEdit.value : readingList[cardEditIndex].comments;
+
+  createCards();
+  createDeleteEvents();
+
+  editBookModal.hide();
+  resetEditBookForm();
+}
+
+function resetEditBookForm() {
+  titleEdit.value = "";
+  authorEdit.value = "";
+  yearEdit.value = "";
+  commentsEdit.value = "";
 }
 
 function removeBook() {
@@ -128,6 +173,7 @@ function removeBook() {
   readingList.splice(cardIndex, 1);
 
   createCards();
+  createEditEvents();
   createDeleteEvents();
 }
 
@@ -148,6 +194,5 @@ let phRead2 = "false";
 addBook(phTitle1, phAuthor1, phYear1, phComments1, phRead1);
 addBook(phTitle2, phAuthor2, phYear2, phComments2, phRead2);
 createCards();
+createEditEvents();
 createDeleteEvents();
-
-// Work In Progress
