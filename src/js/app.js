@@ -35,18 +35,20 @@ function createBook(e) {
   let comments = commentsInput.value;
   read = document.querySelector('input[name="read-pending"]:checked').value;
 
-  addBookToList(title, author, year, comments, read);
-  createCard();
+  addBook(title, author, year, comments, read);
+  createCards();
+  createDeleteEvents();
+
   modal.hide();
   resetForm();
 }
 
-function addBookToList(title, author, year, comments, read) {
+function addBook(title, author, year, comments, read) {
   const newBook = new Book(title, author, year, comments, read);
   readingList.push(newBook);
 }
 
-function createCard() {
+function createCards() {
   bookList.textContent = "";
 
   readingList.forEach((book, index) => {
@@ -72,9 +74,9 @@ function createCard() {
     checkbox.classList.add("btn-check", "read-pending");
     buttonRead.classList.add("btn", "btn-outline-secondary", "me-auto");
     buttonEdit.classList.add("btn", "btn-outline-secondary");
-    buttonDelete.classList.add("btn", "btn-outline-secondary");
+    buttonDelete.classList.add("btn", "btn-outline-secondary", "delete");
 
-    col.setAttribute("id", `book${index}`);
+    col.setAttribute("id", `${index}`);
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("id", `read-book${index}`);
     checkbox.setAttribute("autocomplete", "off");
@@ -114,6 +116,21 @@ function resetForm() {
   document.getElementById("pending").checked = false;
 }
 
+function createDeleteEvents() {
+  const deleteButtons = document.querySelectorAll(".delete");
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", removeBook);
+  });
+}
+
+function removeBook() {
+  const cardIndex = this.parentElement.parentElement.parentElement.id;
+  readingList.splice(cardIndex, 1);
+
+  createCards();
+  createDeleteEvents();
+}
+
 // Placeholder Books
 let phTitle1 = "The Count of Monte Cristo";
 let phAuthor1 = "Alexandre Dumas";
@@ -127,6 +144,20 @@ let phYear2 = 1965;
 let phComments2 = "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis, autem.";
 let phRead2 = "Pending";
 
-addBookToList(phTitle1, phAuthor1, phYear1, phComments1, phRead1);
-addBookToList(phTitle2, phAuthor2, phYear2, phComments2, phRead2);
-createCard();
+// Setup
+addBook(phTitle1, phAuthor1, phYear1, phComments1, phRead1);
+addBook(phTitle2, phAuthor2, phYear2, phComments2, phRead2);
+createCards();
+createDeleteEvents();
+
+// Work In Progress
+function createReadEvents() {
+  const readButtons = document.querySelectorAll(".read-pending");
+  readButtons.forEach((button) => {
+    button.addEventListener("click", readBook);
+  });
+}
+
+createReadEvents();
+
+function readBook() {}
