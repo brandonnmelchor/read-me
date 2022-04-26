@@ -3,10 +3,12 @@ import * as bootstrap from "bootstrap";
 
 // Variables
 let readingList = [];
-const bookList = document.getElementById("book-list");
+const bookArea = document.getElementById("book-area");
+
+const addBookButtons = document.querySelectorAll(".add-book-button");
+const clearListButtons = document.querySelectorAll(".clear-list-button");
 
 let addBookModal = new bootstrap.Modal(document.getElementById("add-book-modal"));
-const addBookButtons = document.querySelectorAll(".add-book-button");
 const addBookForm = document.getElementById("add-book-form");
 const titleAdd = document.getElementById("title");
 const authorAdd = document.getElementById("author");
@@ -25,7 +27,9 @@ let cardEditIndex;
 // Event Listeners
 addBookForm.addEventListener("submit", createBook);
 editBookForm.addEventListener("submit", editBook);
+
 addBookButtons.forEach((button) => button.addEventListener("click", resetAddBookForm));
+clearListButtons.forEach((button) => button.addEventListener("click", clearReadingList));
 
 function createEditEvents() {
   const editButtons = document.querySelectorAll(".edit");
@@ -61,7 +65,7 @@ function createBook(e) {
   readStatus = document.querySelector('input[name="read-pending"]:checked').value;
 
   if (checkDuplicates(title)) {
-    alert(`"${title}" is already in your libary.`);
+    alert(`"${title}" is already in your reading list.`);
     return;
   }
 
@@ -80,7 +84,7 @@ function addBook(title, author, year, comments, read) {
 }
 
 function createCards() {
-  bookList.textContent = "";
+  bookArea.textContent = "";
 
   readingList.forEach((book, index) => {
     const col = document.createElement("div");
@@ -125,7 +129,7 @@ function createCards() {
     buttonEdit.textContent = "Edit";
     buttonDelete.textContent = "Delete";
 
-    bookList.appendChild(col);
+    bookArea.appendChild(col);
     col.appendChild(card);
     card.appendChild(cardHeader);
     card.appendChild(cardBody1);
@@ -161,7 +165,7 @@ function editBook(e) {
   e.preventDefault();
 
   if (checkDuplicates(titleEdit.value)) {
-    alert(`"${titleEdit.value}" is already in your libary.`);
+    alert(`"${titleEdit.value}" is already in your reading list.`);
     return;
   }
 
@@ -186,15 +190,6 @@ function resetEditBookForm() {
   cardEditIndex = null;
 }
 
-function removeBook() {
-  const cardIndex = this.parentElement.parentElement.parentElement.id;
-  readingList.splice(cardIndex, 1);
-
-  createCards();
-  createEditEvents();
-  createDeleteEvents();
-}
-
 function checkDuplicates(title) {
   let duplicateBook = false;
 
@@ -206,6 +201,23 @@ function checkDuplicates(title) {
   });
 
   return duplicateBook;
+}
+
+function removeBook() {
+  const cardIndex = this.parentElement.parentElement.parentElement.id;
+  readingList.splice(cardIndex, 1);
+
+  createCards();
+  createEditEvents();
+  createDeleteEvents();
+}
+
+function clearReadingList() {
+  readingList = [];
+
+  createCards();
+  createEditEvents();
+  createDeleteEvents();
 }
 
 // Placeholder Books
