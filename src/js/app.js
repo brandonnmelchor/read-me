@@ -60,7 +60,7 @@ function createCards() {
     const cardText = document.createElement("p");
     const cardBody2 = document.createElement("div");
     const checkbox = document.createElement("input");
-    const buttonRead = document.createElement("label");
+    const readLabel = document.createElement("label");
     const buttonEdit = document.createElement("button");
     const buttonDelete = document.createElement("button");
 
@@ -71,8 +71,8 @@ function createCards() {
     cardTitle.classList.add("card-title", "text-muted", "mb-3");
     cardText.classList.add("card-text");
     cardBody2.classList.add("card-body", "d-flex", "gap-2");
-    checkbox.classList.add("btn-check", "read-pending");
-    buttonRead.classList.add("btn", "btn-outline-secondary", "me-auto");
+    checkbox.classList.add("btn-check");
+    readLabel.classList.add("btn", "btn-outline-secondary", "me-auto");
     buttonEdit.classList.add("btn", "btn-outline-secondary");
     buttonDelete.classList.add("btn", "btn-outline-secondary", "delete");
 
@@ -80,15 +80,15 @@ function createCards() {
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("id", `read-book${index}`);
     checkbox.setAttribute("autocomplete", "off");
-    buttonRead.setAttribute("for", `read-book${index}`);
+    readLabel.setAttribute("for", `read-book${index}`);
     buttonEdit.setAttribute("type", "button");
     buttonDelete.setAttribute("type", "button");
 
     cardHeader.textContent = book.title;
     cardTitle.textContent = `${book.author} | ${book.year}`;
     cardText.textContent = book.comments;
-    buttonRead.textContent = book.read;
-    if (book.read == "Read") checkbox.checked = true;
+    if (book.read == "true") checkbox.checked = true;
+    readLabel.textContent = "Read";
     buttonEdit.textContent = "Edit";
     buttonDelete.textContent = "Delete";
 
@@ -100,7 +100,7 @@ function createCards() {
     cardBody1.appendChild(cardText);
     card.appendChild(cardBody2);
     cardBody2.appendChild(checkbox);
-    cardBody2.appendChild(buttonRead);
+    cardBody2.appendChild(readLabel);
     cardBody2.appendChild(buttonEdit);
     cardBody2.appendChild(buttonDelete);
   });
@@ -136,13 +136,13 @@ let phTitle1 = "The Count of Monte Cristo";
 let phAuthor1 = "Alexandre Dumas";
 let phYear1 = 1844;
 let phComments1 = "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis, autem.";
-let phRead1 = "Read";
+let phRead1 = "true";
 
 let phTitle2 = "Dune";
 let phAuthor2 = "Frank Herbert";
 let phYear2 = 1965;
 let phComments2 = "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis, autem.";
-let phRead2 = "Pending";
+let phRead2 = "false";
 
 // Setup
 addBook(phTitle1, phAuthor1, phYear1, phComments1, phRead1);
@@ -151,13 +151,3 @@ createCards();
 createDeleteEvents();
 
 // Work In Progress
-function createReadEvents() {
-  const readButtons = document.querySelectorAll(".read-pending");
-  readButtons.forEach((button) => {
-    button.addEventListener("click", readBook);
-  });
-}
-
-createReadEvents();
-
-function readBook() {}
