@@ -58,7 +58,11 @@ function createBook(e) {
   let comments = commentsAdd.value;
   readStatus = document.querySelector('input[name="read-pending"]:checked').value;
 
-  if (checkDuplicates(title)) return;
+  if (checkDuplicates(title)) {
+    alert(`"${title}" is already in your libary.`);
+    return;
+  }
+
   addBook(title, author, year, comments, readStatus);
   createCards();
   createEditEvents();
@@ -154,7 +158,11 @@ function setEditBookForm() {
 function editBook(e) {
   e.preventDefault();
 
-  if (checkDuplicates(titleEdit.value)) return;
+  if (checkDuplicates(titleEdit.value)) {
+    alert(`"${titleEdit.value}" is already in your libary.`);
+    return;
+  }
+
   readingList[cardEditIndex].title = titleEdit.value ? titleEdit.value : readingList[cardEditIndex].title;
   readingList[cardEditIndex].author = authorEdit.value ? authorEdit.value : readingList[cardEditIndex].author;
   readingList[cardEditIndex].year = yearEdit.value ? yearEdit.value : readingList[cardEditIndex].year;
