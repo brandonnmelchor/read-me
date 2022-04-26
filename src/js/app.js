@@ -26,11 +26,6 @@ function Book(title, author, year, comments, read) {
 }
 
 // Functions
-function addBookToList(title, author, year, comments, read) {
-  const newBook = new Book(title, author, year, comments, read);
-  readingList.push(newBook);
-}
-
 function createBook(e) {
   e.preventDefault();
 
@@ -42,19 +37,13 @@ function createBook(e) {
 
   addBookToList(title, author, year, comments, read);
   createCard();
-
   modal.hide();
   resetForm();
 }
 
-function resetForm() {
-  titleInput.value = "";
-  authorInput.value = "";
-  yearInput.value = "";
-  commentsInput.value = "";
-  read = "";
-  document.getElementById("read").checked = true;
-  document.getElementById("pending").checked = false;
+function addBookToList(title, author, year, comments, read) {
+  const newBook = new Book(title, author, year, comments, read);
+  readingList.push(newBook);
 }
 
 function createCard() {
@@ -73,7 +62,7 @@ function createCard() {
     const buttonEdit = document.createElement("button");
     const buttonDelete = document.createElement("button");
 
-    col.classList.add("col");
+    col.classList.add("col", "d-flex");
     card.classList.add("card");
     cardHeader.classList.add("card-header");
     cardBody1.classList.add("card-body");
@@ -113,6 +102,16 @@ function createCard() {
     cardBody2.appendChild(buttonEdit);
     cardBody2.appendChild(buttonDelete);
   });
+}
+
+function resetForm() {
+  titleInput.value = "";
+  authorInput.value = "";
+  yearInput.value = "";
+  commentsInput.value = "";
+  read = "";
+  document.getElementById("read").checked = true;
+  document.getElementById("pending").checked = false;
 }
 
 // Placeholder Books
