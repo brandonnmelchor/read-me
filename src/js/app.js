@@ -68,15 +68,6 @@ function createBook(e) {
   resetAddBookForm();
 }
 
-function checkDuplicates(title) {
-  let duplicateBook = false;
-  readingList.forEach((book) => {
-    if (book.title.toLowerCase() === title.toLowerCase()) duplicateBook = true;
-  });
-
-  return duplicateBook;
-}
-
 function addBook(title, author, year, comments, read) {
   const newBook = new Book(title, author, year, comments, read);
   readingList.push(newBook);
@@ -163,6 +154,7 @@ function setEditBookForm() {
 function editBook(e) {
   e.preventDefault();
 
+  if (checkDuplicates(titleEdit.value)) return;
   readingList[cardEditIndex].title = titleEdit.value ? titleEdit.value : readingList[cardEditIndex].title;
   readingList[cardEditIndex].author = authorEdit.value ? authorEdit.value : readingList[cardEditIndex].author;
   readingList[cardEditIndex].year = yearEdit.value ? yearEdit.value : readingList[cardEditIndex].year;
@@ -181,6 +173,7 @@ function resetEditBookForm() {
   authorEdit.value = "";
   yearEdit.value = "";
   commentsEdit.value = "";
+  cardEditIndex = null;
 }
 
 function removeBook() {
@@ -190,6 +183,19 @@ function removeBook() {
   createCards();
   createEditEvents();
   createDeleteEvents();
+}
+
+function checkDuplicates(title) {
+  let duplicateBook = false;
+
+  readingList.forEach((book, index) => {
+    if (book.title.toLowerCase() === title.toLowerCase()) {
+      duplicateBook = true;
+      if (cardEditIndex !== undefined && cardEditIndex == index) duplicateBook = false;
+    }
+  });
+
+  return duplicateBook;
 }
 
 // Placeholder Books
