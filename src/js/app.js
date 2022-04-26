@@ -3,6 +3,7 @@ import * as bootstrap from "bootstrap";
 
 // Variables
 let readingList = [];
+const bookList = document.getElementById("book-list");
 
 let modal = new bootstrap.Modal(document.getElementById("add-book"));
 const form = document.getElementById("new-book");
@@ -13,9 +14,9 @@ const commentsInput = document.getElementById("comments");
 let read;
 
 // Event Listeners
-form.addEventListener("submit", newBook);
+form.addEventListener("submit", createBook);
 
-// Functions
+// Constructor
 function Book(title, author, year, comments, read) {
   this.title = title;
   this.author = author;
@@ -24,12 +25,13 @@ function Book(title, author, year, comments, read) {
   this.read = read;
 }
 
+// Functions
 function addBookToList(title, author, year, comments, read) {
   const newBook = new Book(title, author, year, comments, read);
   readingList.push(newBook);
 }
 
-function newBook(e) {
+function createBook(e) {
   e.preventDefault();
 
   let title = titleInput.value;
@@ -39,6 +41,7 @@ function newBook(e) {
   read = document.querySelector('input[name="read-pending"]:checked').value;
 
   addBookToList(title, author, year, comments, read);
+  createCard();
 
   modal.hide();
   resetForm();
@@ -52,4 +55,53 @@ function resetForm() {
   read = "";
   document.getElementById("read").checked = true;
   document.getElementById("pending").checked = false;
+}
+
+function createCard() {
+  bookList.textContent = "";
+
+  readingList.forEach((book, index) => {
+    const col = document.createElement("div");
+    const card = document.createElement("div");
+    const cardHeader = document.createElement("h5");
+    const cardBody1 = document.createElement("div");
+    const cardTitle = document.createElement("h6");
+    const cardText = document.createElement("p");
+    const cardBody2 = document.createElement("div");
+    const checkbox = document.createElement("input");
+    const buttonRead = document.createElement("label");
+    const buttonEdit = document.createElement("button");
+    const buttonDelete = document.createElement("button");
+
+    col.classList.add("col");
+    card.classList.add("card");
+    cardHeader.classList.add("card-header");
+    cardBody1.classList.add("card-body");
+    cardTitle.classList.add("card-title", "text-muted", "mb-3");
+    cardText.classList.add("card-text");
+    cardBody2.classList.add("card-body", "d-flex", "gap-2");
+    checkbox.classList.add("btn-check");
+    buttonRead.classList.add("btn", "btn-outline-secondary", "me-auto");
+    buttonEdit.classList.add("btn", "btn-outline-secondary");
+    buttonDelete.classList.add("btn", "btn-outline-secondary");
+
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.setAttribute("id", `book${1}`);
+    checkbox.setAttribute("autocomplete", "off");
+    buttonRead.setAttribute("for", `book${1}`);
+    buttonEdit.setAttribute("type", "button");
+    buttonDelete.setAttribute("type", "button");
+
+    bookList.appendChild(col);
+    col.appendChild(card);
+    card.appendChild(cardHeader);
+    card.appendChild(cardBody1);
+    cardBody1.appendChild(cardTitle);
+    cardBody1.appendChild(cardText);
+    card.appendChild(cardBody2);
+    cardBody2.appendChild(checkbox);
+    cardBody2.appendChild(buttonRead);
+    cardBody2.appendChild(buttonEdit);
+    cardBody2.appendChild(buttonDelete);
+  });
 }
