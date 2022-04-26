@@ -29,7 +29,7 @@
           <div class="nav-item dropdown ms-3">
             <a class="dropdown-toggle d-flex align-items-center text-white text-decoration-none" role="button" data-bs-toggle="dropdown">
               <img src="./images/user-icon.png" alt="User profile picture." class="user-icon rounded-circle me-2" />
-              <strong class="fs-5">Solomon </strong>
+              <strong class="fs-5">Melchor </strong>
             </a>
 
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
@@ -50,7 +50,7 @@
 
     <section class="book-list">
       <div class="container-lg py-5">
-        <div class="row row-cols row-cols-md-2 row-cols-lg-3  row-cols-xl-4 g-4">
+        <div class="row row-cols row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
           <div class="col">
             <div class="card">
               <h5 class="card-header">The Count of Monte Cristo</h5>
@@ -123,7 +123,7 @@
       </div>
     </section>
 
-    <form id="form-book">
+    <form id="new-book" onsubmit="() => false;">
       <div class="modal fade" id="add-book" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -158,10 +158,10 @@
             </div>
 
             <div class="modal-footer justify-content-center align-items-center">
-              <input type="radio" class="btn-check" name="read-pending" id="read" value="true" autocomplete="off" checked>
+              <input type="radio" class="btn-check" name="read-pending" id="read" value="Read" autocomplete="off" checked>
               <label class="btn btn-outline-secondary" for="read">Read</label>
 
-              <input type="radio" class="btn-check" name="read-pending" id="pending" value="false" autocomplete="off">
+              <input type="radio" class="btn-check" name="read-pending" id="pending" value="Pending" autocomplete="off">
               <label class="btn btn-outline-secondary me-auto" for="pending">Pending</label>
 
               <button type="submit" class="btn  btn-outline-secondary">Submit</button>

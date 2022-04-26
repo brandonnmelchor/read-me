@@ -8,9 +8,6 @@ function Book(title, author, year, comments, read) {
   this.year = year;
   this.comments = comments;
   this.read = read;
-  this.showInfo = function () {
-    return `${title} by ${author}. Written ${year}. ${read ? "Read" : "Pending"}.`;
-  };
 }
 
 function addBookToList(title, author, year, comments, read) {
@@ -18,18 +15,37 @@ function addBookToList(title, author, year, comments, read) {
   readingList.push(newBook);
 }
 
-const title = document.querySelector("#title");
-const author = document.querySelector("#author");
-const year = document.querySelector("#year");
-const comments = document.querySelector("#comments");
-const read = "";
+let modal = new bootstrap.Modal(document.getElementById("add-book"));
+const form = document.getElementById("new-book");
+form.addEventListener("submit", newBook);
 
-const form = document.querySelector("#form-book");
-form.addEventListener("submit", submitBook);
+const titleInput = document.getElementById("title");
+const authorInput = document.getElementById("author");
+const yearInput = document.getElementById("year");
+const commentsInput = document.getElementById("comments");
+let read;
 
-function submitBook() {
-  const newRead = document.querySelector('input[name="read-pending"]:checked');
-  read = newRead.value;
+function newBook(e) {
+  e.preventDefault();
+
+  let title = titleInput.value;
+  let author = authorInput.value;
+  let year = yearInput.value;
+  let comments = commentsInput.value;
+  read = document.querySelector('input[name="read-pending"]:checked').value;
+
+  addBookToList(title, author, year, comments, read);
+
+  modal.hide();
+  resetForm();
 }
 
-console.log(read);
+function resetForm() {
+  titleInput.value = "";
+  authorInput.value = "";
+  yearInput.value = "";
+  commentsInput.value = "";
+  read = "";
+  document.getElementById("read").checked = true;
+  document.getElementById("pending").checked = false;
+}
