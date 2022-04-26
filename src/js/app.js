@@ -62,7 +62,7 @@ function createCard() {
     const buttonEdit = document.createElement("button");
     const buttonDelete = document.createElement("button");
 
-    col.classList.add("col", "d-flex");
+    col.classList.add("col");
     card.classList.add("card");
     cardHeader.classList.add("card-header");
     cardBody1.classList.add("card-body");
