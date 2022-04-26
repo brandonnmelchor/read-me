@@ -6,6 +6,7 @@ let readingList = [];
 const bookList = document.getElementById("book-list");
 
 let addBookModal = new bootstrap.Modal(document.getElementById("add-book-modal"));
+const addBookButtons = document.querySelectorAll(".add-book-button");
 const addBookForm = document.getElementById("add-book-form");
 const titleAdd = document.getElementById("title");
 const authorAdd = document.getElementById("author");
@@ -24,6 +25,7 @@ let cardEditIndex;
 // Event Listeners
 addBookForm.addEventListener("submit", createBook);
 editBookForm.addEventListener("submit", editBook);
+addBookButtons.forEach((button) => button.addEventListener("click", resetAddBookForm));
 
 function createEditEvents() {
   const editButtons = document.querySelectorAll(".edit");
