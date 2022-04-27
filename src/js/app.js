@@ -159,6 +159,14 @@ function setEditBookForm() {
   authorEdit.value = readingList[cardEditIndex].author;
   yearEdit.value = readingList[cardEditIndex].year;
   commentsEdit.value = readingList[cardEditIndex].comments;
+
+  if (readingList[cardEditIndex].read === "true") {
+    document.getElementById("edit-read").checked = true;
+    document.getElementById("edit-pending").checked = false;
+  } else {
+    document.getElementById("edit-read").checked = false;
+    document.getElementById("edit-pending").checked = true;
+  }
 }
 
 function editBook(e) {
@@ -173,6 +181,7 @@ function editBook(e) {
   readingList[cardEditIndex].author = authorEdit.value ? authorEdit.value : readingList[cardEditIndex].author;
   readingList[cardEditIndex].year = yearEdit.value ? yearEdit.value : readingList[cardEditIndex].year;
   readingList[cardEditIndex].comments = commentsEdit.value ? commentsEdit.value : readingList[cardEditIndex].comments;
+  readingList[cardEditIndex].read = document.querySelector('input[name="edit-read-pending"]:checked').value;
 
   createCards();
   createEditEvents();
