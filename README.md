@@ -1,3 +1,3 @@
-# reading-list
+# read-me
 
-https://brandonnmelchor.github.io/reading-list/
+https://brandonnmelchor.github.io/read-me/
