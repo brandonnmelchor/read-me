@@ -1,8 +1,19 @@
-// $green: #198754;
-// $green-200: shade-color($green, 20%);
-// $primary: $green-200;
+$dark: #0a1929;
+$black: darken($dark, 10%);
+$secondary: #5c718a;
+$light: #e9edf1;
+$white: #ffffff;
 
-$dropdown-dark-link-active-bg: #52575c;
+$navbar-dark-color: $white;
+
+$dropdown-dark-color: $white;
+$dropdown-dark-bg: lighten($dark, 5%);
+$dropdown-link-active-bg: rgba($white, .25);
+
+$card-border-color: rgba(#103e70, .125);
+
+$body-color: #17314f;
+$text-muted: $secondary;
 
 #add-card-height {
   height: 228px;
