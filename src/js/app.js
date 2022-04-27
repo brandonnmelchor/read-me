@@ -248,13 +248,13 @@ function clearReadingList() {
 let phTitle1 = "The Count of Monte Cristo";
 let phAuthor1 = "Alexandre Dumas";
 let phYear1 = 1844;
-let phComments1 = "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis, autem.";
+let phComments1 = "Marcus recommended this to me. I really enjoyed it and plan to re-read it again.";
 let phRead1 = "true";
 
 let phTitle2 = "Dune";
 let phAuthor2 = "Frank Herbert";
 let phYear2 = 1965;
-let phComments2 = "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis, autem.";
+let phComments2 = "I just saw the movie recently and was curious about reading the book. Just adding this here for now as a reminder.";
 let phRead2 = "false";
 
 // Setup
