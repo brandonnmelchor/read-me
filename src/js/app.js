@@ -38,6 +38,13 @@ function createEditEvents() {
   });
 }
 
+function createReadEvents() {
+  const readCheckboxes = document.querySelectorAll(".read-checkbox");
+  readCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener("click", updateReadStatus);
+  });
+}
+
 function createDeleteEvents() {
   const deleteButtons = document.querySelectorAll(".delete");
   deleteButtons.forEach((button) => {
@@ -72,6 +79,7 @@ function createBook(e) {
   addBook(title, author, year, comments, readStatus);
   createCards();
   createEditEvents();
+  createReadEvents();
   createDeleteEvents();
 
   addBookModal.hide();
@@ -106,7 +114,7 @@ function createCards() {
     cardTitle.classList.add("card-title", "text-muted", "mb-3");
     cardText.classList.add("card-text");
     cardBody2.classList.add("card-body", "d-flex", "gap-2");
-    checkbox.classList.add("btn-check");
+    checkbox.classList.add("btn-check", "read-checkbox");
     readLabel.classList.add("btn", "btn-outline-secondary", "me-auto");
     buttonEdit.classList.add("btn", "btn-outline-secondary", "edit");
     buttonDelete.classList.add("btn", "btn-outline-secondary", "delete");
@@ -185,6 +193,7 @@ function editBook(e) {
 
   createCards();
   createEditEvents();
+  createReadEvents();
   createDeleteEvents();
 
   editBookModal.hide();
@@ -197,6 +206,13 @@ function resetEditBookForm() {
   yearEdit.value = "";
   commentsEdit.value = "";
   cardEditIndex = null;
+}
+
+function updateReadStatus() {
+  cardEditIndex = this.parentElement.parentElement.parentElement.id;
+  readingList[cardEditIndex].read = this.checked ? "true" : "false";
+
+  resetEditBookForm();
 }
 
 function checkDuplicates(title) {
@@ -218,6 +234,7 @@ function removeBook() {
 
   createCards();
   createEditEvents();
+  createReadEvents();
   createDeleteEvents();
 }
 
@@ -225,8 +242,6 @@ function clearReadingList() {
   readingList = [];
 
   createCards();
-  createEditEvents();
-  createDeleteEvents();
 }
 
 // Placeholder Books
@@ -247,4 +262,5 @@ addBook(phTitle1, phAuthor1, phYear1, phComments1, phRead1);
 addBook(phTitle2, phAuthor2, phYear2, phComments2, phRead2);
 createCards();
 createEditEvents();
+createReadEvents();
 createDeleteEvents();
