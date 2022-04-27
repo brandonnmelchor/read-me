@@ -31,17 +31,17 @@ editBookForm.addEventListener("submit", editBook);
 addBookButtons.forEach((button) => button.addEventListener("click", resetAddBookForm));
 clearListButtons.forEach((button) => button.addEventListener("click", clearReadingList));
 
-function createEditEvents() {
-  const editButtons = document.querySelectorAll(".edit");
-  editButtons.forEach((button) => {
-    button.addEventListener("click", setEditBookForm);
-  });
-}
-
 function createReadEvents() {
   const readCheckboxes = document.querySelectorAll(".read-checkbox");
   readCheckboxes.forEach((checkbox) => {
     checkbox.addEventListener("click", updateReadStatus);
+  });
+}
+
+function createEditEvents() {
+  const editButtons = document.querySelectorAll(".edit");
+  editButtons.forEach((button) => {
+    button.addEventListener("click", setEditBookForm);
   });
 }
 
@@ -161,6 +161,13 @@ function resetAddBookForm() {
   document.getElementById("pending").checked = false;
 }
 
+function updateReadStatus() {
+  cardEditIndex = this.parentElement.parentElement.parentElement.id;
+  readingList[cardEditIndex].read = this.checked ? "true" : "false";
+
+  resetEditBookForm();
+}
+
 function setEditBookForm() {
   cardEditIndex = this.parentElement.parentElement.parentElement.id;
   titleEdit.value = readingList[cardEditIndex].title;
@@ -206,13 +213,6 @@ function resetEditBookForm() {
   yearEdit.value = "";
   commentsEdit.value = "";
   cardEditIndex = null;
-}
-
-function updateReadStatus() {
-  cardEditIndex = this.parentElement.parentElement.parentElement.id;
-  readingList[cardEditIndex].read = this.checked ? "true" : "false";
-
-  resetEditBookForm();
 }
 
 function checkDuplicates(title) {
