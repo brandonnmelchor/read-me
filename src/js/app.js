@@ -81,13 +81,12 @@ function createBook(e) {
   }
 
   addBook(title, author, year, comments, readStatus);
-  createCards();
+  createBookCards();
   createEditEvents();
   createReadEvents();
   createDeleteEvents();
 
   addBookModal.hide();
-  resetAddBookForm();
 }
 
 function addBook(title, author, year, comments, read) {
@@ -95,7 +94,7 @@ function addBook(title, author, year, comments, read) {
   readingList.push(newBook);
 }
 
-function createCards() {
+function createBookCards() {
   bookArea.textContent = "";
 
   readingList.forEach((book, index) => {
@@ -154,6 +153,10 @@ function createCards() {
     cardBody2.appendChild(buttonDelete);
   });
 
+  createAddCard();
+}
+
+function createAddCard() {
   const col = document.createElement("div");
   const card = document.createElement("div");
   const cardBody = document.createElement("div");
@@ -164,6 +167,7 @@ function createCards() {
   cardBody.classList.add("card-body", "d-flex", "justify-content-center", "align-items-center");
   cardTitle.classList.add("card-title", "d-flex", "justify-content-center", "align-items-center", "text-muted");
 
+  card.setAttribute("id", "add-book-card");
   card.setAttribute("role", "button");
   card.setAttribute("data-bs-toggle", "modal");
   card.setAttribute("data-bs-target", "#add-book-modal");
@@ -175,6 +179,9 @@ function createCards() {
   col.appendChild(card);
   card.appendChild(cardBody);
   cardBody.appendChild(cardTitle);
+
+  const addBookCard = document.getElementById("add-book-card");
+  addBookCard.addEventListener("click", resetAddBookForm);
 }
 
 function resetAddBookForm() {
@@ -224,7 +231,7 @@ function editBook(e) {
   readingList[cardEditIndex].comments = commentsEdit.value ? commentsEdit.value : readingList[cardEditIndex].comments;
   readingList[cardEditIndex].read = document.querySelector('input[name="edit-read-pending"]:checked').value;
 
-  createCards();
+  createBookCards();
   createEditEvents();
   createReadEvents();
   createDeleteEvents();
@@ -258,7 +265,7 @@ function removeBook() {
   const cardIndex = this.parentElement.parentElement.parentElement.id;
   readingList.splice(cardIndex, 1);
 
-  createCards();
+  createBookCards();
   createEditEvents();
   createReadEvents();
   createDeleteEvents();
@@ -267,7 +274,7 @@ function removeBook() {
 function clearReadingList() {
   readingList = [];
 
-  createCards();
+  createBookCards();
 }
 
 // Placeholder Books
@@ -280,13 +287,13 @@ let phRead1 = "true";
 let phTitle2 = "Dune";
 let phAuthor2 = "Frank Herbert";
 let phYear2 = 1965;
-let phComments2 = "I just saw the movie recently and was curious about reading the book. Just adding this here for now as a reminder.";
+let phComments2 = "I just saw the movie recently and was curious about the book. Just adding this here for now as a reminder.";
 let phRead2 = "false";
 
 // Setup
 addBook(phTitle1, phAuthor1, phYear1, phComments1, phRead1);
 addBook(phTitle2, phAuthor2, phYear2, phComments2, phRead2);
-createCards();
+createBookCards();
 createEditEvents();
 createReadEvents();
 createDeleteEvents();
