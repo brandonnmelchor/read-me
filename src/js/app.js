@@ -25,6 +25,8 @@ const commentsEdit = document.getElementById("edit-comments");
 let cardEditIndex;
 
 // Number Input Max
+yearAdd.max = new Date().getFullYear();
+yearEdit.max = new Date().getFullYear();
 
 // Event Listeners
 addBookForm.addEventListener("submit", createBook);
