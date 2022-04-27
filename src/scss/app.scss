@@ -1,8 +1,10 @@
+// bootstrap functions
+@import "~bootstrap/scss/functions";
+
 // update variables
 @import "./custom-variables.scss";
 
-// bootstrap functions, stylesheets, and api
-@import "~bootstrap/scss/functions";
+// bootstrap stylesheets and api
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/root";
