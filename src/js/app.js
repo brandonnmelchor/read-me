@@ -162,11 +162,12 @@ function createCards() {
   col.classList.add("col");
   card.classList.add("card", "h-100", "shadow-sm");
   cardBody.classList.add("card-body", "d-flex", "justify-content-center", "align-items-center");
-  cardTitle.classList.add("card-title", "text-muted");
+  cardTitle.classList.add("card-title", "d-flex", "justify-content-center", "align-items-center", "text-muted");
 
   card.setAttribute("role", "button");
   card.setAttribute("data-bs-toggle", "modal");
   card.setAttribute("data-bs-target", "#add-book-modal");
+  cardTitle.setAttribute("id", "add-card-height");
 
   cardTitle.textContent = "Add Book";
 
