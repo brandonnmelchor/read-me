@@ -24,6 +24,8 @@ const yearEdit = document.getElementById("edit-year");
 const commentsEdit = document.getElementById("edit-comments");
 let cardEditIndex;
 
+// Number Input Max
+
 // Event Listeners
 addBookForm.addEventListener("submit", createBook);
 editBookForm.addEventListener("submit", editBook);
@@ -108,7 +110,7 @@ function createCards() {
     const buttonDelete = document.createElement("button");
 
     col.classList.add("col");
-    card.classList.add("card", "h-100");
+    card.classList.add("card", "h-100", "shadow-sm");
     cardHeader.classList.add("card-header");
     cardBody1.classList.add("card-body", "h-100");
     cardTitle.classList.add("card-title", "text-muted", "mb-3");
@@ -149,6 +151,27 @@ function createCards() {
     cardBody2.appendChild(buttonEdit);
     cardBody2.appendChild(buttonDelete);
   });
+
+  const col = document.createElement("div");
+  const card = document.createElement("div");
+  const cardBody = document.createElement("div");
+  const cardTitle = document.createElement("h4");
+
+  col.classList.add("col");
+  card.classList.add("card", "h-100", "shadow-sm");
+  cardBody.classList.add("card-body", "d-flex", "justify-content-center", "align-items-center");
+  cardTitle.classList.add("card-title", "text-muted");
+
+  card.setAttribute("role", "button");
+  card.setAttribute("data-bs-toggle", "modal");
+  card.setAttribute("data-bs-target", "#add-book-modal");
+
+  cardTitle.textContent = "Add Book";
+
+  bookArea.appendChild(col);
+  col.appendChild(card);
+  card.appendChild(cardBody);
+  cardBody.appendChild(cardTitle);
 }
 
 function resetAddBookForm() {
