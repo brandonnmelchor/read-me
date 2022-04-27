@@ -155,6 +155,7 @@ function createCards() {
   });
 
   const col = document.createElement("div");
+  const cardContainer = document.createElement("div");
   const card = document.createElement("div");
   const cardBody = document.createElement("div");
   const cardTitle = document.createElement("h4");
@@ -164,6 +165,7 @@ function createCards() {
   cardBody.classList.add("card-body", "d-flex", "justify-content-center", "align-items-center");
   cardTitle.classList.add("card-title", "text-muted");
 
+  cardContainer.setAttribute("id", "card-container");
   card.setAttribute("role", "button");
   card.setAttribute("data-bs-toggle", "modal");
   card.setAttribute("data-bs-target", "#add-book-modal");
@@ -171,7 +173,8 @@ function createCards() {
   cardTitle.textContent = "Add Book";
 
   bookArea.appendChild(col);
-  col.appendChild(card);
+  col.appendChild(cardContainer);
+  cardContainer.appendChild(card);
   card.appendChild(cardBody);
   cardBody.appendChild(cardTitle);
 }
