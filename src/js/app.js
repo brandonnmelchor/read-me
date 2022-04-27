@@ -5,8 +5,8 @@ import * as bootstrap from "bootstrap";
 let readingList = [];
 const bookArea = document.getElementById("book-area");
 
-const addBookButtons = document.querySelectorAll(".add-book-button");
-const clearListButtons = document.querySelectorAll(".clear-list-button");
+const addBookButton = document.getElementById("add-book-button");
+const clearListButton = document.getElementById("clear-list-button");
 
 let addBookModal = new bootstrap.Modal(document.getElementById("add-book-modal"));
 const addBookForm = document.getElementById("add-book-form");
@@ -29,11 +29,11 @@ yearAdd.max = new Date().getFullYear();
 yearEdit.max = new Date().getFullYear();
 
 // Event Listeners
+addBookButton.addEventListener("click", resetAddBookForm);
+clearListButton.addEventListener("click", clearReadingList);
+
 addBookForm.addEventListener("submit", createBook);
 editBookForm.addEventListener("submit", editBook);
-
-addBookButtons.forEach((button) => button.addEventListener("click", resetAddBookForm));
-clearListButtons.forEach((button) => button.addEventListener("click", clearReadingList));
 
 function createReadEvents() {
   const readCheckboxes = document.querySelectorAll(".read-checkbox");
