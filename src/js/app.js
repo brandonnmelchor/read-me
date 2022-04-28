@@ -57,14 +57,12 @@ function createDeleteEvents() {
 }
 
 // constructors
-class Book {
-  constructor(title, author, year, comments, read) {
-    this.title = title;
-    this.author = author;
-    this.year = year;
-    this.comments = comments;
-    this.read = read;
-  }
+function Book(title, author, year, comments, read) {
+  this.title = title;
+  this.author = author;
+  this.year = year;
+  this.comments = comments;
+  this.read = read;
 }
 
 // functions
@@ -299,3 +297,32 @@ createBookCards();
 createEditEvents();
 createReadEvents();
 createDeleteEvents();
+
+// Work in progress
+
+function saveLocalStorage() {
+  readingList.forEach((book, index) => {
+    localStorage.setItem(`${index}`, JSON.stringify(book));
+  });
+}
+
+function loadLocalStorage() {
+  if (localStorage.length > 0) {
+    for (const book in localStorage) {
+      const savedBook = JSON.parse(localStorage.getItem(book));
+      if (savedBook) addBookFromStorage(savedBook);
+    }
+  } else readingList = [];
+}
+
+function addBookFromStorage(book) {
+  const newBook = new Book(book.title, book.author, book.year, book.comments, book.read);
+  readingList.push(newBook);
+}
+
+// saveLocalStorage();
+// loadLocalStorage();
+localStorage.clear();
+
+// console.table(localStorage);
+console.log(readingList);
