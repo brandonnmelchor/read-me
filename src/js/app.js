@@ -1,7 +1,7 @@
-// Imports
+// imports
 import * as bootstrap from "bootstrap";
 
-// Variables
+// variables
 let readingList = [];
 const bookArea = document.getElementById("book-area");
 
@@ -24,11 +24,11 @@ const yearEdit = document.getElementById("edit-year");
 const commentsEdit = document.getElementById("edit-comments");
 let cardEditIndex;
 
-// Number Input Max
+// max number inputs
 yearAdd.max = new Date().getFullYear();
 yearEdit.max = new Date().getFullYear();
 
-// Event Listeners
+// event listeners
 addBookButton.addEventListener("click", resetAddBookForm);
 clearListButton.addEventListener("click", clearReadingList);
 
@@ -56,16 +56,18 @@ function createDeleteEvents() {
   });
 }
 
-// Constructor
-function Book(title, author, year, comments, read) {
-  this.title = title;
-  this.author = author;
-  this.year = year;
-  this.comments = comments;
-  this.read = read;
+// constructors
+class Book {
+  constructor(title, author, year, comments, read) {
+    this.title = title;
+    this.author = author;
+    this.year = year;
+    this.comments = comments;
+    this.read = read;
+  }
 }
 
-// Functions
+// functions
 function createBook(e) {
   e.preventDefault();
 
@@ -277,7 +279,7 @@ function clearReadingList() {
   createBookCards();
 }
 
-// Placeholder Books
+// placeholder books
 let phTitle1 = "The Count of Monte Cristo";
 let phAuthor1 = "Alexandre Dumas";
 let phYear1 = 1844;
@@ -290,7 +292,7 @@ let phYear2 = 1965;
 let phComments2 = "I just saw the movie recently and was curious about the book. Just adding this here for now as a reminder.";
 let phRead2 = "false";
 
-// Setup
+// setup
 addBook(phTitle1, phAuthor1, phYear1, phComments1, phRead1);
 addBook(phTitle2, phAuthor2, phYear2, phComments2, phRead2);
 createBookCards();
