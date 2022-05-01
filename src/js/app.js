@@ -40,7 +40,7 @@ editBookForm.addEventListener("submit", editBook);
 function createReadEvents() {
   const readCheckboxes = document.querySelectorAll(".read-checkbox");
   readCheckboxes.forEach((checkbox) => {
-    checkbox.addEventListener("click", updateReadStatus);
+    checkbox.addEventListener("click", editReadStatus);
   });
 }
 
@@ -91,6 +91,26 @@ function createBook(e) {
 function addBook(title, author, year, comments, read) {
   const newBook = new Book(title, author, year, comments, read);
   readingList.push(newBook);
+}
+
+function addPlaceholderBooks() {
+  if (localStorage.getItem("hasCodeRunBefore") === null) {
+    let phTitle1 = "The Count of Monte Cristo";
+    let phAuthor1 = "Alexandre Dumas";
+    let phYear1 = 1844;
+    let phComments1 = "Marcus recommended this to me. I really enjoyed it and plan to re-read it again.";
+    let phRead1 = "true";
+
+    let phTitle2 = "Dune";
+    let phAuthor2 = "Frank Herbert";
+    let phYear2 = 1965;
+    let phComments2 = "I just saw the movie recently and was curious about the book. Just adding this here for now as a reminder.";
+    let phRead2 = "false";
+
+    addBook(phTitle1, phAuthor1, phYear1, phComments1, phRead1);
+    addBook(phTitle2, phAuthor2, phYear2, phComments2, phRead2);
+    localStorage.setItem("hasCodeRunBefore", "true");
+  }
 }
 
 function createBookCards() {
@@ -196,14 +216,6 @@ function resetAddBookForm() {
   document.getElementById("pending").checked = false;
 }
 
-function updateReadStatus() {
-  cardEditIndex = this.parentElement.parentElement.parentElement.id;
-  readingList[cardEditIndex].read = this.checked ? "true" : "false";
-
-  saveLocalStorage();
-  resetEditBookForm();
-}
-
 function setEditBookForm() {
   cardEditIndex = this.parentElement.parentElement.parentElement.id;
   titleEdit.value = readingList[cardEditIndex].title;
@@ -240,6 +252,14 @@ function editBook(e) {
   editBookModal.hide();
 }
 
+function editReadStatus() {
+  cardEditIndex = this.parentElement.parentElement.parentElement.id;
+  readingList[cardEditIndex].read = this.checked ? "true" : "false";
+
+  saveLocalStorage();
+  resetEditBookForm();
+}
+
 function resetEditBookForm() {
   titleEdit.value = "";
   authorEdit.value = "";
@@ -273,26 +293,6 @@ function clearReadingList() {
   readingList = [];
   clearLocalStorage();
   createBookCards();
-}
-
-function addPlaceholderBooks() {
-  if (localStorage.getItem("hasCodeRunBefore") === null) {
-    let phTitle1 = "The Count of Monte Cristo";
-    let phAuthor1 = "Alexandre Dumas";
-    let phYear1 = 1844;
-    let phComments1 = "Marcus recommended this to me. I really enjoyed it and plan to re-read it again.";
-    let phRead1 = "true";
-
-    let phTitle2 = "Dune";
-    let phAuthor2 = "Frank Herbert";
-    let phYear2 = 1965;
-    let phComments2 = "I just saw the movie recently and was curious about the book. Just adding this here for now as a reminder.";
-    let phRead2 = "false";
-
-    addBook(phTitle1, phAuthor1, phYear1, phComments1, phRead1);
-    addBook(phTitle2, phAuthor2, phYear2, phComments2, phRead2);
-    localStorage.setItem("hasCodeRunBefore", "true");
-  }
 }
 
 function saveLocalStorage() {
