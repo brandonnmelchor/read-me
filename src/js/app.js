@@ -32,7 +32,7 @@ yearEdit.max = new Date().getFullYear();
 // event listeners
 addBookButton.addEventListener("click", resetAddBookForm);
 clearListButton.addEventListener("click", clearReadingList);
-resetDemoButton.addEventListener("click", placeholderBooks);
+resetDemoButton.addEventListener("click", addPlaceholderBooks);
 
 addBookForm.addEventListener("submit", createBook);
 editBookForm.addEventListener("submit", editBook);
@@ -271,33 +271,32 @@ function removeBook() {
 
 function clearReadingList() {
   readingList = [];
-  localStorage.clear();
+  clearLocalStorage();
   createBookCards();
 }
 
-function placeholderBooks() {
-  clearReadingList();
+function addPlaceholderBooks() {
+  if (localStorage.getItem("hasCodeRunBefore") === null) {
+    let phTitle1 = "The Count of Monte Cristo";
+    let phAuthor1 = "Alexandre Dumas";
+    let phYear1 = 1844;
+    let phComments1 = "Marcus recommended this to me. I really enjoyed it and plan to re-read it again.";
+    let phRead1 = "true";
 
-  let phTitle1 = "The Count of Monte Cristo";
-  let phAuthor1 = "Alexandre Dumas";
-  let phYear1 = 1844;
-  let phComments1 = "Marcus recommended this to me. I really enjoyed it and plan to re-read it again.";
-  let phRead1 = "true";
+    let phTitle2 = "Dune";
+    let phAuthor2 = "Frank Herbert";
+    let phYear2 = 1965;
+    let phComments2 = "I just saw the movie recently and was curious about the book. Just adding this here for now as a reminder.";
+    let phRead2 = "false";
 
-  let phTitle2 = "Dune";
-  let phAuthor2 = "Frank Herbert";
-  let phYear2 = 1965;
-  let phComments2 = "I just saw the movie recently and was curious about the book. Just adding this here for now as a reminder.";
-  let phRead2 = "false";
-
-  addBook(phTitle1, phAuthor1, phYear1, phComments1, phRead1);
-  addBook(phTitle2, phAuthor2, phYear2, phComments2, phRead2);
-  saveLocalStorage();
-  createBookCards();
+    addBook(phTitle1, phAuthor1, phYear1, phComments1, phRead1);
+    addBook(phTitle2, phAuthor2, phYear2, phComments2, phRead2);
+    localStorage.setItem("hasCodeRunBefore", "true");
+  }
 }
 
 function saveLocalStorage() {
-  localStorage.clear();
+  clearLocalStorage();
   readingList.forEach((book, index) => {
     localStorage.setItem(`${index}`, JSON.stringify(book));
   });
@@ -318,7 +317,15 @@ function addBookFromStorage(book) {
   readingList.push(newBook);
 }
 
+function clearLocalStorage() {
+  if (localStorage.getItem("hasCodeRunBefore") !== null) {
+    localStorage.clear();
+    localStorage.setItem("hasCodeRunBefore", "true");
+  } else localStorage.clear();
+}
+
 // setup
 loadLocalStorage();
+addPlaceholderBooks();
 saveLocalStorage();
 createBookCards();
