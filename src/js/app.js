@@ -32,7 +32,7 @@ yearEdit.max = new Date().getFullYear();
 // event listeners
 addBookButton.addEventListener("click", resetAddBookForm);
 clearListButton.addEventListener("click", clearReadingList);
-resetDemoButton.addEventListener("click", addPlaceholderBooks);
+resetDemoButton.addEventListener("click", resetDemo);
 
 addBookForm.addEventListener("submit", createBook);
 editBookForm.addEventListener("submit", editBook);
@@ -67,7 +67,7 @@ function Book(title, author, year, comments, read) {
   this.read = read;
 }
 
-// functions
+// add book functions
 function createBook(e) {
   e.preventDefault();
 
@@ -216,6 +216,7 @@ function resetAddBookForm() {
   document.getElementById("pending").checked = false;
 }
 
+// edit book functions
 function setEditBookForm() {
   cardEditIndex = this.parentElement.parentElement.parentElement.id;
   titleEdit.value = readingList[cardEditIndex].title;
@@ -268,6 +269,7 @@ function resetEditBookForm() {
   cardEditIndex = null;
 }
 
+// duplicate book function
 function checkDuplicates(title) {
   let duplicateBook = false;
 
@@ -281,6 +283,7 @@ function checkDuplicates(title) {
   return duplicateBook;
 }
 
+// delete book functions
 function removeBook() {
   const cardIndex = this.parentElement.parentElement.parentElement.id;
   readingList.splice(cardIndex, 1);
@@ -295,6 +298,15 @@ function clearReadingList() {
   createBookCards();
 }
 
+function resetDemo() {
+  localStorage.clear();
+  clearReadingList();
+  addPlaceholderBooks();
+  saveLocalStorage();
+  createBookCards();
+}
+
+// local storage functions
 function saveLocalStorage() {
   clearLocalStorage();
   readingList.forEach((book, index) => {
@@ -324,7 +336,7 @@ function clearLocalStorage() {
   } else localStorage.clear();
 }
 
-// setup
+// initialize
 loadLocalStorage();
 addPlaceholderBooks();
 saveLocalStorage();
