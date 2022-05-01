@@ -56,7 +56,7 @@ function createDeleteEvents() {
   });
 }
 
-// constructors
+// constructor
 function Book(title, author, year, comments, read) {
   this.title = title;
   this.author = author;
@@ -81,6 +81,7 @@ function createBook(e) {
   }
 
   addBook(title, author, year, comments, readStatus);
+  saveLocalStorage();
   createBookCards();
   createEditEvents();
   createReadEvents();
@@ -198,6 +199,7 @@ function updateReadStatus() {
   cardEditIndex = this.parentElement.parentElement.parentElement.id;
   readingList[cardEditIndex].read = this.checked ? "true" : "false";
 
+  saveLocalStorage();
   resetEditBookForm();
 }
 
@@ -231,6 +233,7 @@ function editBook(e) {
   readingList[cardEditIndex].comments = commentsEdit.value ? commentsEdit.value : readingList[cardEditIndex].comments;
   readingList[cardEditIndex].read = document.querySelector('input[name="edit-read-pending"]:checked').value;
 
+  saveLocalStorage();
   createBookCards();
   createEditEvents();
   createReadEvents();
@@ -265,6 +268,7 @@ function removeBook() {
   const cardIndex = this.parentElement.parentElement.parentElement.id;
   readingList.splice(cardIndex, 1);
 
+  saveLocalStorage();
   createBookCards();
   createEditEvents();
   createReadEvents();
@@ -273,8 +277,30 @@ function removeBook() {
 
 function clearReadingList() {
   readingList = [];
-
+  localStorage.clear();
   createBookCards();
+}
+
+function saveLocalStorage() {
+  localStorage.clear();
+  readingList.forEach((book, index) => {
+    localStorage.setItem(`${index}`, JSON.stringify(book));
+  });
+}
+
+function loadLocalStorage() {
+  readingList = [];
+  if (localStorage.length > 0) {
+    for (let i = 0; i < localStorage.length; i++) {
+      const savedBook = JSON.parse(localStorage.getItem(`${i}`));
+      if (savedBook) addBookFromStorage(savedBook);
+    }
+  }
+}
+
+function addBookFromStorage(book) {
+  const newBook = new Book(book.title, book.author, book.year, book.comments, book.read);
+  readingList.push(newBook);
 }
 
 // placeholder books
@@ -291,38 +317,13 @@ let phComments2 = "I just saw the movie recently and was curious about the book.
 let phRead2 = "false";
 
 // setup
-addBook(phTitle1, phAuthor1, phYear1, phComments1, phRead1);
-addBook(phTitle2, phAuthor2, phYear2, phComments2, phRead2);
+// addBook(phTitle1, phAuthor1, phYear1, phComments1, phRead1);
+// addBook(phTitle2, phAuthor2, phYear2, phComments2, phRead2);
+loadLocalStorage();
+saveLocalStorage();
 createBookCards();
 createEditEvents();
 createReadEvents();
 createDeleteEvents();
 
 // Work in progress
-
-function saveLocalStorage() {
-  readingList.forEach((book, index) => {
-    localStorage.setItem(`${index}`, JSON.stringify(book));
-  });
-}
-
-function loadLocalStorage() {
-  if (localStorage.length > 0) {
-    for (const book in localStorage) {
-      const savedBook = JSON.parse(localStorage.getItem(book));
-      if (savedBook) addBookFromStorage(savedBook);
-    }
-  } else readingList = [];
-}
-
-function addBookFromStorage(book) {
-  const newBook = new Book(book.title, book.author, book.year, book.comments, book.read);
-  readingList.push(newBook);
-}
-
-// saveLocalStorage();
-// loadLocalStorage();
-localStorage.clear();
-
-// console.table(localStorage);
-console.log(readingList);
