@@ -83,10 +83,6 @@ function createBook(e) {
   addBook(title, author, year, comments, readStatus);
   saveLocalStorage();
   createBookCards();
-  createEditEvents();
-  createReadEvents();
-  createDeleteEvents();
-
   addBookModal.hide();
 }
 
@@ -155,6 +151,9 @@ function createBookCards() {
   });
 
   createAddCard();
+  createEditEvents();
+  createReadEvents();
+  createDeleteEvents();
 }
 
 function createAddCard() {
@@ -235,12 +234,8 @@ function editBook(e) {
 
   saveLocalStorage();
   createBookCards();
-  createEditEvents();
-  createReadEvents();
-  createDeleteEvents();
-
-  editBookModal.hide();
   resetEditBookForm();
+  editBookModal.hide();
 }
 
 function resetEditBookForm() {
@@ -270,9 +265,6 @@ function removeBook() {
 
   saveLocalStorage();
   createBookCards();
-  createEditEvents();
-  createReadEvents();
-  createDeleteEvents();
 }
 
 function clearReadingList() {
@@ -303,27 +295,29 @@ function addBookFromStorage(book) {
   readingList.push(newBook);
 }
 
-// placeholder books
-let phTitle1 = "The Count of Monte Cristo";
-let phAuthor1 = "Alexandre Dumas";
-let phYear1 = 1844;
-let phComments1 = "Marcus recommended this to me. I really enjoyed it and plan to re-read it again.";
-let phRead1 = "true";
-
-let phTitle2 = "Dune";
-let phAuthor2 = "Frank Herbert";
-let phYear2 = 1965;
-let phComments2 = "I just saw the movie recently and was curious about the book. Just adding this here for now as a reminder.";
-let phRead2 = "false";
-
 // setup
-// addBook(phTitle1, phAuthor1, phYear1, phComments1, phRead1);
-// addBook(phTitle2, phAuthor2, phYear2, phComments2, phRead2);
 loadLocalStorage();
 saveLocalStorage();
 createBookCards();
-createEditEvents();
-createReadEvents();
-createDeleteEvents();
 
-// Work in progress
+// Work in Progress
+// function placeholderBooks() {
+//   let phTitle1 = "The Count of Monte Cristo";
+//   let phAuthor1 = "Alexandre Dumas";
+//   let phYear1 = 1844;
+//   let phComments1 = "Marcus recommended this to me. I really enjoyed it and plan to re-read it again.";
+//   let phRead1 = "true";
+
+//   let phTitle2 = "Dune";
+//   let phAuthor2 = "Frank Herbert";
+//   let phYear2 = 1965;
+//   let phComments2 = "I just saw the movie recently and was curious about the book. Just adding this here for now as a reminder.";
+//   let phRead2 = "false";
+
+//   addBook(phTitle1, phAuthor1, phYear1, phComments1, phRead1);
+//   addBook(phTitle2, phAuthor2, phYear2, phComments2, phRead2);
+//   saveLocalStorage();
+// }
+
+// console.table(localStorage);
+// console.table(readingList);
