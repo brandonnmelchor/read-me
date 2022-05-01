@@ -15,15 +15,15 @@ $card-border-color: rgba(#103e70, .125);
 $body-color: #17314f;
 $text-muted: $secondary;
 
+.user-icon {
+  width: 35px;
+  height: 35px;
+}
+
 #add-card-height {
   height: 228px;
 }
 
 .card-text {
   height: 90px;
-}
-
-.user-icon {
-  width: 35px;
-  height: 35px;
 }
