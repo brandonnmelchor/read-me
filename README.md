@@ -1,5 +1,6 @@
-I created Read Me, a personal library app that allows users to add books and update them as they progress. I built this page using Bootstrap, SASS, and vanilla JavaScript. I also used Parcel as my bundler.
+# Read Me - Library App
 
+I created Read Me, a personal library app that allows users to add books and update them as they progress. I built this page using Bootstrap, SASS, and vanilla JavaScript. I also used Parcel as my bundler.
 
 - Information for each book is stored in an object. All book objects are stored in an array and in the browser local storage. A function creates a card for each book using the array.
 
